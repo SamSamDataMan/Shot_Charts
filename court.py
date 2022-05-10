@@ -56,25 +56,24 @@ def draw_court(plot):
     return plot
 
 
-def plot_shot_density(shot_df, plot_type='hex'):
-    plot_title = 'Test'
+def plot_shot_density(shot_df, team_name, season, plot_type='hex'):
     # Plot the type of 2D shot density estimation desired
     if plot_type == 'hex':
         plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type, gridsize=30)
     elif plot_type == 'kde':
-        plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type)
+        plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type)  # TODO Slider for number of levels in kde plot
     elif plot_type == 'contour':
         plot = (sns.jointplot(x=-shot_df['X Location'],
                               y=shot_df['Y Location'],
                               color='b',
-                              alpha=0.005).plot_joint(sns.kdeplot, zorder=0, n_levels=6))
+                              alpha=0.005).plot_joint(sns.kdeplot, zorder=0, n_levels=45))  # TODO Slider for number of levels in contour plot
     else:
         print("Oops! You've provided an invalid plot_type value. Please use 'hex', 'kde', or 'contour'")
         return None
 
     # Draw NBA court markings and write title
     plot = draw_court(plot)
-    plot.ax_joint.set_title(plot_title + ' Shot Density', fontsize=14)
+    plot.ax_joint.set_title(season + ' ' + team_name + ' Shot Density', fontsize=14)
     plt.show()
     plt.close()
 
