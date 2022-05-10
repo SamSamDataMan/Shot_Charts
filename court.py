@@ -56,7 +56,7 @@ def draw_court(plot):
     return plot
 
 
-def plot_shot_density(shot_df, team_name, season, plot_type='hex'):
+def plot_shot_chart(shot_df, title, plot_type='hex'):
     # Plot the type of 2D shot density estimation desired
     if plot_type == 'hex':
         plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type, gridsize=30)
@@ -73,7 +73,7 @@ def plot_shot_density(shot_df, team_name, season, plot_type='hex'):
 
     # Draw NBA court markings and write title
     plot = draw_court(plot)
-    plot.ax_joint.set_title(season + ' ' + team_name + ' Shot Density', fontsize=14)
+    plot.ax_joint.set_title(title, fontsize=14)
     plt.show()
     plt.close()
 
