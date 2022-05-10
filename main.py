@@ -11,25 +11,17 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
 import seaborn as sns
 import streamlit as st
-from sidebar import sidebar, season_select, styler
+from sidebar import sidebar, select_season, select_team, styler
 from court import draw_court
 from court import plot_shot_density
 
-
-team_id = 1610612744
-# season = '2013-14'
-
-season = season_select()
-
-
+season = select_season()
 base = os.path.dirname(__file__)
 data = pd.read_csv(os.path.join(base, 'Data', 'NBA Shot Locations_' + season + '.csv'))
 
-shot_df = data[(data['Team ID'] == team_id) & (data['Season'] == season)]
+team_name = select_team(data['Team Name'].unique())
 
-
-team_name = shot_df['Team Name'].unique()[0]
-st.text(team_name)
+shot_df = data[(data['Team Name'] == team_name) & (data['Season'] == season)]
 
 style = styler()
 
