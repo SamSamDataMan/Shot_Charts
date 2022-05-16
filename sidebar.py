@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from seasons import seasons
 
 def sidebar():
@@ -14,7 +15,7 @@ def select_game(df):
     games = df[['Game Date', 'Game ID', 'Home Team', 'Away Team']]
     games['Game Date'] = games['Game Date'].astype('datetime64')
     games.sort_values('Game Date', ascending=True, inplace=True)
-    games['Game Title'] = df['Game Date'] + ' ' + df['Away Team'] + ' at ' + df['Home Team'] 
+    games['Game Title'] = pd.to_datetime(games['Game Date']).dt.strftime('%d-%b-%Y') + ' - ' + df['Away Team'] + ' at ' + df['Home Team']
     games.drop_duplicates(inplace=True)
     game_choice = st.sidebar.selectbox('Choose a game', games['Game Title'].unique())
     game = games[games['Game Title'] == game_choice]

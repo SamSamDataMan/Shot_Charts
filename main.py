@@ -26,9 +26,9 @@ title = season + ' ' + team_name + ' Shot Chart'
 if game_ind():
     game = select_game(shot_df)
     st.text(game)
+    shot_df = shot_df[shot_df['Game ID'] == game['Game ID'].iloc[0]]
     game_name = game['Game Title'].iloc[0]
     title = game_name + ' ' + team_name + ' Shot Chart'
-
 
 style = styler()
 
