@@ -1,4 +1,5 @@
 Sandbox.ipynb
 __pycache__
 experiments.py
-/.ipynb_checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
