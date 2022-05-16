@@ -78,3 +78,20 @@ def plot_shot_chart(shot_df, title, plot_type='hex'):
     plt.close()
 
     return plot
+
+
+def shot_chart_scatterplot(shot_df, title):
+    grid = sns.JointGrid(x=-shot_df['X Location'], y=shot_df['Y Location'])
+    g = grid.plot_joint(sns.scatterplot,
+                        hue=shot_df['Shot Made Flag'],
+                        style=shot_df['Shot Made Flag'],
+                        markers=['X', 'o'],
+                        palette=['r', 'g'],
+                        s=75)
+
+    # Draw NBA court markings and write title
+    plot = draw_court(g)
+    plot.ax_joint.set_title(title, fontsize=14)
+    plt.show()
+    plt.close()
+    return plot

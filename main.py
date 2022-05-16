@@ -12,7 +12,7 @@ from matplotlib.patches import Arc
 import seaborn as sns
 import streamlit as st
 from sidebar import sidebar, select_season, select_team, select_game, game_ind, styler
-from court import draw_court, plot_shot_chart
+from court import draw_court, plot_shot_chart, shot_chart_scatterplot
 
 season = select_season()
 base = os.path.dirname(__file__)
@@ -32,5 +32,6 @@ if game_ind():
 
 style = styler()
 
-fig = plot_shot_chart(shot_df, title, style)
+# fig = plot_shot_chart(shot_df, title, style)
+fig = shot_chart_scatterplot(shot_df, title)
 st.pyplot(fig)

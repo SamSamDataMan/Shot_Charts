@@ -1,6 +1,6 @@
 streamlit>0.71.0
 pandas>=1.0.5 
 numpy==1.21.2
-seaborn==0.9.0
+seaborn==0.11.2
 matplotlib==3.2.2
 py-ball==1.0
