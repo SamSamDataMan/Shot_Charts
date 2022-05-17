@@ -98,22 +98,22 @@ def shot_chart_hex(shot_df):
                          gridsize=30)
     return plot
 
-def shot_chart_kde(shot_df):
+def shot_chart_kde(shot_df, level):
     plot = sns.jointplot(x=-shot_df['X Location'],
                          y=shot_df['Y Location'],
-                         kind='kde'
+                         kind='kde',
+                         n_levels=level
                          # TODO Slider for number of levels in kde plot
                          )
     return plot
 
-def shot_chart_contour(shot_df):
+def shot_chart_contour(shot_df, level):
     plot = (sns.jointplot(x=-shot_df['X Location'],
                           y=shot_df['Y Location'],
                           color='b',
                           alpha=0.005).plot_joint(sns.kdeplot,
                                                   zorder=0,
-                                                  n_levels=45
-                                                  # TODO Slider for number of n_levels in contour plot
+                                                  n_levels=level
                                                   )
 
             )

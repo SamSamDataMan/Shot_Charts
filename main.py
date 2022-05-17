@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
 import seaborn as sns
 import streamlit as st
-from sidebar import sidebar, select_season, select_team, select_game, game_ind, styler
+from sidebar import sidebar, select_season, select_team, select_game, game_ind, styler, levels
 from court import draw_court, shot_chart_scatterplot, render_plot, shot_chart_hex, shot_chart_kde, shot_chart_contour
 
 season = select_season()
@@ -38,9 +38,11 @@ if style == 'scatter':
 elif style == 'hex':
     plot = shot_chart_hex(shot_df)
 elif style == 'kde':
-    plot = shot_chart_kde(shot_df)
+    level = levels()
+    plot = shot_chart_kde(shot_df, level)
 elif style == 'contour':
-    plot = shot_chart_contour(shot_df)
+    level = levels()
+    plot = shot_chart_contour(shot_df, level)
 
 
 fig = render_plot(plot, title)

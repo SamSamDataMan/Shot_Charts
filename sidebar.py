@@ -27,3 +27,6 @@ def game_ind():
 def styler():
     choice = st.sidebar.selectbox('Choose Style of Shot Chart', ['Hex', 'KDE', 'Contour', 'Scatter'])
     return choice.lower()
+
+def levels():
+    return st.sidebar.slider('Change Granularity', 5, 50, 30)
