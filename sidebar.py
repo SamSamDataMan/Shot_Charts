@@ -25,7 +25,7 @@ def game_ind():
     return st.sidebar.checkbox('Would you like to view a specific game?')
 
 def styler():
-    choice = st.sidebar.selectbox('Choose Style of Shot Chart', ['Hex', 'KDE', 'Contour', 'Scatter'])
+    choice = st.sidebar.selectbox('Choose Style of Shot Chart', ['Scatter', 'Hex', 'KDE', 'Contour'])
     return choice.lower()
 
 def levels():
