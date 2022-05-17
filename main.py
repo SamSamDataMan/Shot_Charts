@@ -20,12 +20,13 @@ data = pd.read_csv(os.path.join(base, 'Data', 'NBA Shot Locations_' + season + '
 
 team_name = select_team(data['Team Name'].unique())
 
-shot_df = data[(data['Team Name'] == team_name) & (data['Season'] == season)]
+shot_df = data[(data['Team Name'] == team_name) & (data['Season'] == season)] #ToDo clean up season logic, already reading in by season
 title = season + ' ' + team_name + ' Shot Chart'
+marker_size = 75
 
 if game_ind():
+    marker_size = 150
     game = select_game(shot_df)
-    st.text(game)
     shot_df = shot_df[shot_df['Game ID'] == game['Game ID'].iloc[0]]
     game_name = game['Game Title'].iloc[0]
     title = game_name + ' ' + team_name + ' Shot Chart'
@@ -34,7 +35,7 @@ style = styler()
 
 # fig = plot_shot_chart(shot_df, title, style)
 if style == 'scatter':
-    plot = shot_chart_scatterplot(shot_df)
+    plot = shot_chart_scatterplot(shot_df, marker_size)
 elif style == 'hex':
     plot = shot_chart_hex(shot_df)
 elif style == 'kde':
@@ -44,6 +45,8 @@ elif style == 'contour':
     level = levels()
     plot = shot_chart_contour(shot_df, level)
 
-
+fig = plt.figure()
 fig = render_plot(plot, title)
+ax = plt.gca()
+#ax.set_facecolor('#f29539')
 st.pyplot(fig)

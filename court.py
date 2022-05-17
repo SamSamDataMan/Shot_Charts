@@ -80,14 +80,16 @@ def draw_court(plot):
 #     return plot
 
 
-def shot_chart_scatterplot(shot_df):
+def shot_chart_scatterplot(shot_df, marker_size):
     grid = sns.JointGrid(x=-shot_df['X Location'], y=shot_df['Y Location'])
     plot = grid.plot_joint(sns.scatterplot,
                            hue=shot_df['Shot Made Flag'],
                            style=shot_df['Shot Made Flag'],
                            markers=['X', 'o'],
                            palette=['r', 'g'],
-                           s=75)
+                           s=marker_size)
+    plot.ax_marg_x.set_axis_off()
+    plot.ax_marg_y.set_axis_off()
 
     return plot
 
@@ -95,7 +97,8 @@ def shot_chart_hex(shot_df):
     plot = sns.jointplot(x=-shot_df['X Location'],
                          y=shot_df['Y Location'],
                          kind='hex',
-                         gridsize=30)
+                         alpha=1,
+                         gridsize=18)
     return plot
 
 def shot_chart_kde(shot_df, level):
@@ -105,6 +108,7 @@ def shot_chart_kde(shot_df, level):
                          n_levels=level
                          # TODO Slider for number of levels in kde plot
                          )
+    plot.plot_joint(sns.kdeplot, cmap="Reds", shade=True, shade_lowest=False, alpha=.5)
     return plot
 
 def shot_chart_contour(shot_df, level):
