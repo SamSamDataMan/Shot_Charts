@@ -56,41 +56,72 @@ def draw_court(plot):
     return plot
 
 
-def plot_shot_chart(shot_df, title, plot_type='hex'):
-    # Plot the type of 2D shot density estimation desired
-    if plot_type == 'hex':
-        plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type, gridsize=30)
-    elif plot_type == 'kde':
-        plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type)  # TODO Slider for number of levels in kde plot
-    elif plot_type == 'contour':
-        plot = (sns.jointplot(x=-shot_df['X Location'],
-                              y=shot_df['Y Location'],
-                              color='b',
-                              alpha=0.005).plot_joint(sns.kdeplot, zorder=0, n_levels=45))  # TODO Slider for number of levels in contour plot
-    else:
-        print("Oops! You've provided an invalid plot_type value. Please use 'hex', 'kde', or 'contour'")
-        return None
+# def plot_shot_chart(shot_df, title, plot_type='hex'):
+#     # Plot the type of 2D shot density estimation desired
+#     # if plot_type == 'hex':
+#     #     plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type, gridsize=30)
+#     # if plot_type == 'kde':
+#     #     plot = sns.jointplot(x=-shot_df['X Location'], y=shot_df['Y Location'], kind=plot_type)  # TODO Slider for number of levels in kde plot
+#     if plot_type == 'contour':
+#         plot = (sns.jointplot(x=-shot_df['X Location'],
+#                               y=shot_df['Y Location'],
+#                               color='b',
+#                               alpha=0.005).plot_joint(sns.kdeplot, zorder=0, n_levels=45))  # TODO Slider for number of levels in contour plot
+#     else:
+#         print("Oops! You've provided an invalid plot_type value. Please use 'hex', 'kde', or 'contour'")
+#         return None
 
-    # Draw NBA court markings and write title
-    plot = draw_court(plot)
-    plot.ax_joint.set_title(title, fontsize=14)
-    plt.show()
-    plt.close()
+#     # Draw NBA court markings and write title
+#     plot = draw_court(plot)
+#     plot.ax_joint.set_title(title, fontsize=14)
+#     plt.show()
+#     plt.close()
+
+#     return plot
+
+
+def shot_chart_scatterplot(shot_df):
+    grid = sns.JointGrid(x=-shot_df['X Location'], y=shot_df['Y Location'])
+    plot = grid.plot_joint(sns.scatterplot,
+                           hue=shot_df['Shot Made Flag'],
+                           style=shot_df['Shot Made Flag'],
+                           markers=['X', 'o'],
+                           palette=['r', 'g'],
+                           s=75)
 
     return plot
 
+def shot_chart_hex(shot_df):
+    plot = sns.jointplot(x=-shot_df['X Location'],
+                         y=shot_df['Y Location'],
+                         kind='hex',
+                         gridsize=30)
+    return plot
 
-def shot_chart_scatterplot(shot_df, title):
-    grid = sns.JointGrid(x=-shot_df['X Location'], y=shot_df['Y Location'])
-    g = grid.plot_joint(sns.scatterplot,
-                        hue=shot_df['Shot Made Flag'],
-                        style=shot_df['Shot Made Flag'],
-                        markers=['X', 'o'],
-                        palette=['r', 'g'],
-                        s=75)
+def shot_chart_kde(shot_df):
+    plot = sns.jointplot(x=-shot_df['X Location'],
+                         y=shot_df['Y Location'],
+                         kind='kde'
+                         # TODO Slider for number of levels in kde plot
+                         )
+    return plot
 
+def shot_chart_contour(shot_df):
+    plot = (sns.jointplot(x=-shot_df['X Location'],
+                          y=shot_df['Y Location'],
+                          color='b',
+                          alpha=0.005).plot_joint(sns.kdeplot,
+                                                  zorder=0,
+                                                  n_levels=45
+                                                  # TODO Slider for number of n_levels in contour plot
+                                                  )
+
+            )
+    return plot
+
+def render_plot(plot, title):
     # Draw NBA court markings and write title
-    plot = draw_court(g)
+    plot = draw_court(plot)
     plot.ax_joint.set_title(title, fontsize=14)
     plt.show()
     plt.close()
