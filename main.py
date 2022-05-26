@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
 import seaborn as sns
 import streamlit as st
-from sidebar import sidebar, select_season, select_team, select_game, game_ind, styler, levels
+from sidebar import sidebar, select_season, select_team, select_game, game_ind, player_ind, styler, levels
 from court import draw_court, shot_chart_scatterplot, shot_chart_hex, shot_chart_kde, shot_chart_contour
 
 season = select_season()
@@ -33,6 +33,9 @@ if game_ind():
     shot_df = shot_df[shot_df['Game ID'] == game['Game ID'].iloc[0]]
     game_name = game['Game Title'].iloc[0]
     title = game_name + ' ' + team_name + ' Shot Chart'
+
+if player_ind():
+    marker_size = 300
 
 style = styler()
 

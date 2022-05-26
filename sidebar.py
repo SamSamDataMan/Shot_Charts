@@ -22,7 +22,10 @@ def select_game(df):
     return game
 
 def game_ind():
-    return st.sidebar.checkbox('Would you like to view a specific game?')
+    return st.sidebar.checkbox('Show me a specific game.')
+
+def player_ind():
+    return st.sidebar.checkbox('Show me a specific player.')
 
 def styler():
     choice = st.sidebar.selectbox('Choose Style of Shot Chart', ['Scatter', 'Hex', 'KDE', 'Contour'])

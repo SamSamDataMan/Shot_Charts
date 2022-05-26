@@ -53,7 +53,7 @@ def shot_chart_scatterplot(shot_df, marker_size):
                            style=shot_df['Shot Made Flag'],
                            markers=['X', 'o'],
                            palette=['r', 'g'],
-                           s=100)
+                           s=marker_size)
 
 def shot_chart_hex(shot_df, grid_size):
     return plt.hexbin(x=-shot_df['X Location'],
