@@ -46,13 +46,13 @@ def draw_court(fig, ax):
     ax.set(yticks=[])
     ax.set_axis_off()
 
-def shot_chart_scatterplot(shot_df, marker_size):
+def shot_chart_scatterplot(shot_df, marker_size, markers, palette):
     return sns.scatterplot(x=-shot_df['X Location'],
                            y=shot_df['Y Location'],
                            hue=shot_df['Shot Made Flag'],
                            style=shot_df['Shot Made Flag'],
-                           markers=['X', 'o'],
-                           palette=['r', 'g'],
+                           markers=markers,
+                           palette=palette,
                            s=marker_size)
 
 def shot_chart_hex(shot_df, grid_size):
